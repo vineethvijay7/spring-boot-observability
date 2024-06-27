@@ -1,8 +1,8 @@
-name: PR Comment
+name: PR label and comment
 
 on:
   pull_request:
-    types: [opened]
+    types: [opened, labeled, unlabeled, synchronize]
 
 jobs:
   comment:
@@ -11,7 +11,14 @@ jobs:
       contents: write
       pull-requests: write
     steps:
+      - name: add label
+        uses: actions-ecosystem/action-add-labels@v1
+        # if: ${{ startsWith(github.event.comment.body, '/add-labels') }}
+        with:
+          labels: run-fast
+
       - uses: mshick/add-pr-comment@v2
+      
         with:
           message: |
             ### 🎉 Thank you for your Pull Request!
