@@ -33,7 +33,7 @@ jobs:
             ### 🎉 Thank you for your Pull Request!
             
             **Please ensure that:**
-            - [ ] You have ran the tests locally before your commits! This will help to avoid surprises later along the road..
+            - [ ] You have ran the tests locally before your commits !! This will help to avoid surprises later along the road..
 
             #### :radio_button: Add following label to your PR to make changes in the tests execution.
 
