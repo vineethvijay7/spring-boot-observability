@@ -31,16 +31,19 @@ jobs:
         with:
           message: |
             ### 🎉 Thank you for your Pull Request!
-
-            #### :radio_button: Add the following label to your PR to make changes in the build workflow execution:
-
-            - `run-fast`: Runs only the build, no tests. This is default. You can change this behaviour by adding the labels mentioned below.
-            - `run-tests`: Run Tests. You only need to add this when it is really ready to merge, preferably after PR reviews and all.
-
+            
             **Please ensure that:**
-            - [ ] You have ran the tests locally, always.
-                  This will help avoid surprises when you add the label `run-tests` and notice test failures.
+            - [ ] You have ran the tests locally before your commits!
+                  This will help to avoid surprises later along the road.
 
+            #### :radio_button: Add following label to your PR to make changes in the tests execution:
+
+            - `run-fast`: Runs only the build, no tests! This is added as default. You can change this behaviour by adding more labels mentioned below.
+            - `run-tests`: Run Tests. You only need to add this when you want it, ideally right before merge, preferably after PR reviews and all.
+
+
+            **NOTE** that you cannot merge the PR without running the tests with the last committed changes!
+            
             ---
               
             _Happy Coding!_
