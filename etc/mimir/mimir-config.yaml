@@ -1,0 +1,47 @@
+---
+server:
+  http_listen_port: 9009
+
+distributor:
+  ring:
+    kvstore:
+      store: inmemory
+
+# Blocks storage requires a prefix when using a common object storage bucket.
+blocks_storage:
+  storage_prefix: blocks
+  tsdb:
+    dir: /data/ingester
+
+common:
+  storage:
+    backend: s3
+    s3:
+      endpoint: minio:9000
+      access_key_id: mimir
+      secret_access_key: supersecret
+      insecure: true
+      bucket_name: mimir
+
+compactor:
+  data_dir: /tmp/mimir/compactor
+  deletion_delay: 1h
+  sharding_ring:
+    kvstore:
+      store: memberlist
+
+ingester:
+  ring:
+    kvstore:
+      store: memberlist
+    instance_addr: "127.0.0.1"
+    replication_factor: 1
+
+limits:
+  max_label_names_per_series: 100
+  max_global_series_per_user: 1000000
+  # compactor_blocks_retention_period: 2d
+
+store_gateway:
+  sharding_ring:
+    replication_factor: 1
