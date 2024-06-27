@@ -39,11 +39,10 @@ jobs:
             #### :radio_button: Add following label to your PR to make changes in the tests execution:
 
             - `run-fast`: Runs only the build, no tests! This is added as default. You can change this behaviour by adding more labels mentioned below.
-            - `run-tests`: Run Tests. You only need to add this when you want it, ideally right before merge, preferably after PR reviews and all.
+            - `run-tests`: Run Tests too. You may only need to add this when you really want it. Ideally when you are ready to merge.
 
+            **NOTE** that you cannot merge the PR without running the tests workflow with the last committed changes!
 
-            **NOTE** that you cannot merge the PR without running the tests with the last committed changes!
-            
             ---
               
             _Happy Coding!_
