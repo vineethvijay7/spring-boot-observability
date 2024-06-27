@@ -1,4 +1,4 @@
-name: PR Conditional Workflow
+name: PR conditional workflow based labels
 
 on:
   pull_request:
