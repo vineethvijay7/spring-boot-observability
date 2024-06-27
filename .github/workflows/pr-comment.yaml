@@ -36,7 +36,7 @@ jobs:
             - [ ] You have ran the tests locally before your commits !! This will help to avoid surprises later along the road..
 
             #### :radio_button: Add following label to your PR to make changes in the tests execution.
-              Check right side of this PR screen to find `Labels` sectiion:
+                  Check right side of this PR screen to find `Labels` section:
 
             - Label: `run-fast`: Runs only the build, no tests! This is added as default. You can change this behaviour by adding more labels mentioned below.
             - Label: `run-tests`: Run Tests too. You may only need to add this when you really want it. Ideally when you are ready to merge.
