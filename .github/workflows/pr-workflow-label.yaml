@@ -1,0 +1,20 @@
+name: PR Conditional Workflow
+
+on:
+  pull_request:
+    types: [opened, labeled, unlabeled, synchronize]
+
+jobs:
+  conditional-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Analysis if Label Exists
+        if: contains(github.event.pull_request.labels.*.name, 'run-blah') || contains(github.event.pull_request.labels.*.name, 'run-fast')
+        run: echo "Label 'run-analysis' or 'urgent' is present, running analysis..."
+        
+      - name: Default Step
+        run: echo "This runs regardless of labels"
