@@ -1,4 +1,4 @@
-name: PR Comment
+name: Amend PR 
 
 on:
   pull_request:
@@ -10,6 +10,12 @@ jobs:
     permissions:
       pull-requests: write
     steps:
+      - name: add label
+        uses: actions-ecosystem/action-add-labels@v1
+        # if: ${{ startsWith(github.event.comment.body, '/add-labels') }}
+        with:
+          labels: run-fast
+
       - uses: mshick/add-pr-comment@v2
         with:
           message: |
@@ -21,8 +27,8 @@ jobs:
             - `run-tests`: Run Tests. You only need to add this when it is really ready to merge, preferably after PR reviews and all.
 
             **Please ensure that:**
-            - [ ] You have ran the tests locally, always.
-                  This will help avoid surprises when you add the label `run-tests` and notice test failures.
+            - [ ] You have ran the tests locally before your each commits.
+                  This will help to avoid surprises when you add the label `run-tests` and notice test failures.
 
             ---
               

@@ -13,8 +13,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Analysis if Label Exists
-        if: contains(github.event.pull_request.labels.*.name, 'run-blah') || contains(github.event.pull_request.labels.*.name, 'run-fast')
-        run: echo "Label 'run-analysis' or 'urgent' is present, running analysis..."
+        if: contains(github.event.pull_request.labels.*.name, 'run-tests')
+        run: echo "Label 'run-tests' is present, hence going to run all tests..."
         
       - name: Default Step
-        run: echo "This runs regardless of labels"
+        run: echo "This runs regardless of any labels"
