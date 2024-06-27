@@ -3,7 +3,6 @@ name: Remove PR Label
 on:
   pull_request:
     types:
-      - opened
       - labeled
       - unlabeled
 
@@ -13,49 +12,18 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+
     steps:
-      - name: Remove label if present
-        uses: actions/github-script@v6
+      - name: Check if Label Exists
+        id: check-label
+        uses: actions/github-script@v7
         with:
           script: |
-            const labelToRemove = 'run-fast';
-            const labelToCheck = 'run-tests';
-            const owner = context.repo.owner;
-            const repo = context.repo.repo;
-            const issue_number = context.issue.number;
+            const labels = context.payload.pull_request.labels.map(label => label.name);
+            core.setOutput('labelExists', labels.includes('run-tests'));
 
-            // Get the labels on the pull request
-            const { data: labels } = await github.issues.listLabelsOnIssue({
-              owner,
-              repo,
-              issue_number
-            });
-
-            // Check if the label is present
-            const labelExists = labels.some(label => label.name === labelToCheck);
-
-            if (labelExists) {
-              // Remove the label
-              await github.issues.removeLabel({
-                owner,
-                repo,
-                issue_number,
-                name: labelToRemove
-              });
-              console.log(`Removed label: ${labelToRemove}`);
-            } else {
-              console.log(`Label not found: ${labelToRemove}`);
-            }
-      # - name: Check if Label Exists
-      #   id: check-label
-      #   uses: actions/github-script@v7
-      #   with:
-      #     script: |
-      #       const labels = context.payload.pull_request.labels.map(label => label.name);
-      #       core.setOutput('labelExists', labels.includes('run-fast'));
-
-      # - name: Remove Label
-      #   if: steps.check-label.outputs.labelExists == 'true'
-      #   run: |
-      #     # Use GitHub API to remove the label
-      #     curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels/run-fast
+      - name: Remove Label
+        if: steps.check-label.outputs.labelExists == 'true'
+        run: |
+          # Use GitHub API to remove the label
+          curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels/run-fast
