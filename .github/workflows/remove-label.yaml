@@ -3,13 +3,16 @@ name: Remove PR Label
 on:
   pull_request:
     types:
-      - opened
       - labeled
       - unlabeled
 
 jobs:
   remove-label:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
     steps:
       - name: Check if Label Exists
         id: check-label
@@ -17,7 +20,7 @@ jobs:
         with:
           script: |
             const labels = context.payload.pull_request.labels.map(label => label.name);
-            core.setOutput('labelExists', labels.includes('run-fast'));
+            core.setOutput('labelExists', labels.includes('run-tests'));
 
       - name: Remove Label
         if: steps.check-label.outputs.labelExists == 'true'
