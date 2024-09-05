@@ -22,15 +22,15 @@ jobs:
             {
               "attachments": [
                 {
-                  "fallback": "New CPS Release: ${{ github.event.release.tag_name }} is published",
+                  "fallback": "New CPS Release ${{ github.event.release.tag_name }} is published",
                   "color": "#36a64f",
-                  "pretext": "New release: ${{ github.event.release.tag_name }} published by ingka-cps-ci",
+                  "pretext": "New release ${{ github.event.release.tag_name }} published by ingka-cps-ci",
                   "title": "<${{ github.event.release.html_url }}|Release - ${{ github.event.release.tag_name }}>",
                   "text": "Released components:",
                   "fields": [
                     {
                       "title": "Deployment log",
-                      "value": "${{ toJSON(github.event.release.body) }}",
+                      "value": ${{ toJSON(github.event.release.body) }},
                       "short": false
                     }
                   ],
