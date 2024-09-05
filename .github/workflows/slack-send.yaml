@@ -41,34 +41,55 @@ jobs:
             {
               "attachments": [
                 {
-                  "fallback": "Order Update",
-                  "color": "#36a64f",
-                  "pretext": "Shipping Information",
-                  "author_name": "Shipping Department",
-                  "author_link": "https://example.com/shipping",
-                  "author_icon": "https://example.com/shipping-icon.png",
-                  "title": "Order Shipped",
-                  "text": "Your order has been shipped and is on its way.",
+                  "fallback": "GitHub Repository Release",
+                  "color": "#24292e",
+                  "pretext": "New GitHub Repository Release Information",
+                  "author_name": "GitHub",
+                  "author_link": "https://github.com",
+                  "author_icon": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+                  "title": "New Release: v1.2.0",
+                  "title_link": "https://github.com/username/repository/releases/tag/v1.2.0",
+                  "text": "A new release `v1.2.0` has been published for the repository *repository-name*.",
                   "fields": [
                     {
-                      "title": "Carrier",
-                      "value": "FedEx",
+                      "title": "Repository",
+                      "value": "username/repository",
                       "short": true
                     },
                     {
-                      "title": "Tracking Number",
-                      "value": "1Z9999999999999999",
+                      "title": "Tag",
+                      "value": "v1.2.0",
                       "short": true
+                    },
+                    {
+                      "title": "Published By",
+                      "value": "John Doe",
+                      "short": true
+                    },
+                    {
+                      "title": "Release Date",
+                      "value": "September 5th, 2024",
+                      "short": true
+                    },
+                    {
+                      "title": "Changelog",
+                      "value": "- Added feature A\n- Improved performance of B\n- Fixed bug in C",
+                      "short": false
+                    },
+                    {
+                      "title": "Assets",
+                      "value": "[Source Code (zip)](https://github.com/username/repository/archive/refs/tags/v1.2.0.zip)\n[Source Code (tar.gz)](https://github.com/username/repository/archive/refs/tags/v1.2.0.tar.gz)\n[Binary Release](https://github.com/username/repository/releases/download/v1.2.0/binary-release.tar.gz)",
+                      "short": false
                     }
                   ],
-                  "image_url": "https://example.com/shipping-status.png",
-                  "thumb_url": "https://example.com/shipping-icon.png",
-                  "footer": "Company Name",
-                  "footer_icon": "https://example.com/footer-icon.png",
+                  "thumb_url": "https://github.githubassets.com/images/modules/logos_page/Octocat.png",
+                  "footer": "GitHub Repository",
+                  "footer_icon": "https://github.githubassets.com/favicon.ico",
                   "ts": 1633728000
                 }
               ]
             }
+
 
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
