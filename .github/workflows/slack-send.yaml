@@ -39,97 +39,6 @@ jobs:
           # For posting a rich message using Block Kit
           payload: |
             {
-              "text": "New Order Received :package:",
-              "blocks": [
-                {
-                  "type": "header",
-                  "text": {
-                    "type": "plain_text",
-                    "text": "Order Summary",
-                    "emoji": true
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*Order ID:* 12345678\n*Customer Name:* John Doe\n*Total:* $199.99\n*Order Date:* September 4th, 2024"
-                  },
-                  "accessory": {
-                    "type": "image",
-                    "image_url": "https://example.com/order-image.png",
-                    "alt_text": "Order Image"
-                  }
-                },
-                {
-                  "type": "divider"
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*Order Details:*"
-                  }
-                },
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Item:* iPhone 14 Pro"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Price:* $999.99"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Item:* AirPods Pro"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Price:* $199.99"
-                    }
-                  ]
-                },
-                {
-                  "type": "context",
-                  "elements": [
-                    {
-                      "type": "mrkdwn",
-                      "text": "Order will be shipped to *123 Apple Street, Cupertino, CA*."
-                    }
-                  ]
-                },
-                {
-                  "type": "divider"
-                },
-                {
-                  "type": "actions",
-                  "elements": [
-                    {
-                      "type": "button",
-                      "text": {
-                        "type": "plain_text",
-                        "text": "View Order",
-                        "emoji": true
-                      },
-                      "url": "https://example.com/orders/12345678",
-                      "style": "primary"
-                    },
-                    {
-                      "type": "button",
-                      "text": {
-                        "type": "plain_text",
-                        "text": "Contact Support",
-                        "emoji": true
-                      },
-                      "url": "https://example.com/support",
-                      "style": "danger"
-                    }
-                  ]
-                }
-              ],
               "attachments": [
                 {
                   "fallback": "Order Update",
@@ -160,7 +69,6 @@ jobs:
                 }
               ]
             }
-
 
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
