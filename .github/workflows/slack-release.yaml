@@ -30,7 +30,7 @@ jobs:
                   "fields": [
                     {
                       "title": "Deployment log",
-                      "value": ${{ toJSON(github.event.release.body) }},
+                      "value": "{{ github.event.release.body | replace: '\n', '\\n' | jsonify }}",
                       "short": false
                     }
                   ],
