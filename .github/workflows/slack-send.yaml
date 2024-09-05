@@ -8,190 +8,160 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-      - name: Post to a Slack channel
-        id: slack
-        uses: slackapi/slack-github-action@v1.27.0
-        with:
-          # Slack channel id, channel name, or user id to post message.
-          # See also: https://api.slack.com/methods/chat.postMessage#channels
-          channel-id: 'cps-gke-alerts-test'
-          # For posting a rich message using Block Kit
-          payload: |
-            {
-              "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-                  }
-                }
-              ]
-            }
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-
-      # - name: Send custom JSON data to Slack workflow
+      # - name: Post to a Slack channel
       #   id: slack
       #   uses: slackapi/slack-github-action@v1.27.0
       #   with:
+      #     # Slack channel id, channel name, or user id to post message.
+      #     # See also: https://api.slack.com/methods/chat.postMessage#channels
+      #     channel-id: 'cps-gke-alerts-test'
       #     # For posting a rich message using Block Kit
       #     payload: |
       #       {
-      #         "text": "Daily Project Update",
+      #         "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
       #         "blocks": [
       #           {
       #             "type": "section",
       #             "text": {
       #               "type": "mrkdwn",
-      #               "text": "*Project Update*\nHere is the latest update for the project:"
+      #               "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
       #             }
-      #           },
-      #           {
-      #             "type": "divider"
-      #           },
-      #           {
-      #             "type": "section",
-      #             "text": {
-      #               "type": "mrkdwn",
-      #               "text": "*Tasks Completed Today:*"
-      #             }
-      #           },
-      #           {
-      #             "type": "section",
-      #             "fields": [
-      #               {
-      #                 "type": "mrkdwn",
-      #                 "text": "*Frontend*\n1. Implemented login feature\n2. Fixed UI bugs"
-      #               },
-      #               {
-      #                 "type": "mrkdwn",
-      #                 "text": "*Backend*\n1. API integration with third-party service\n2. Optimized database queries"
-      #               }
-      #             ]
-      #           },
-      #           {
-      #             "type": "divider"
-      #           },
-      #           {
-      #             "type": "section",
-      #             "text": {
-      #               "type": "mrkdwn",
-      #               "text": "*Tomorrow's Priorities:*"
-      #             }
-      #           },
-      #           {
-      #             "type": "section",
-      #             "fields": [
-      #               {
-      #                 "type": "mrkdwn",
-      #                 "text": "*Frontend*\n1. Implement password reset flow\n2. Finalize dashboard layout"
-      #               },
-      #               {
-      #                 "type": "mrkdwn",
-      #                 "text": "*Backend*\n1. Setup caching mechanism\n2. Add new endpoints for analytics"
-      #               }
-      #             ]
-      #           },
-      #           {
-      #             "type": "divider"
-      #           },
-      #           {
-      #             "type": "section",
-      #             "text": {
-      #               "type": "mrkdwn",
-      #               "text": "*Team Members Involved:*"
-      #             }
-      #           },
-      #           {
-      #             "type": "context",
-      #             "elements": [
-      #               {
-      #                 "type": "image",
-      #                 "image_url": "https://example.com/team-member1.png",
-      #                 "alt_text": "Team Member 1"
-      #               },
-      #               {
-      #                 "type": "mrkdwn",
-      #                 "text": "Team Member 1: John Doe"
-      #               },
-      #               {
-      #                 "type": "image",
-      #                 "image_url": "https://example.com/team-member2.png",
-      #                 "alt_text": "Team Member 2"
-      #               },
-      #               {
-      #                 "type": "mrkdwn",
-      #                 "text": "Team Member 2: Jane Smith"
-      #               }
-      #             ]
-      #           },
-      #           {
-      #             "type": "divider"
-      #           },
-      #           {
-      #             "type": "section",
-      #             "text": {
-      #               "type": "mrkdwn",
-      #               "text": "*Project Status:* :green_circle: On Track"
-      #             }
-      #           },
-      #           {
-      #             "type": "divider"
-      #           },
-      #           {
-      #             "type": "actions",
-      #             "elements": [
-      #               {
-      #                 "type": "button",
-      #                 "text": {
-      #                   "type": "plain_text",
-      #                   "text": "View Full Report",
-      #                   "emoji": true
-      #                 },
-      #                 "value": "view_report",
-      #                 "url": "https://example.com/full-report"
-      #               },
-      #               {
-      #                 "type": "button",
-      #                 "text": {
-      #                   "type": "plain_text",
-      #                   "text": "Request Feedback",
-      #                   "emoji": true
-      #                 },
-      #                 "value": "request_feedback",
-      #                 "action_id": "request_feedback"
-      #               }
-      #             ]
-      #           }
-      #         ],
-      #         "attachments": [
-      #           {
-      #             "color": "#36a64f",
-      #             "pretext": "Project milestone achieved!",
-      #             "title": "Milestone 1",
-      #             "title_link": "https://example.com/milestone-1",
-      #             "text": "We have successfully completed the first milestone of the project. All tasks were completed on schedule.",
-      #             "fields": [
-      #               {
-      #                 "title": "Start Date",
-      #                 "value": "2023-08-01",
-      #                 "short": true
-      #               },
-      #               {
-      #                 "title": "End Date",
-      #                 "value": "2023-09-01",
-      #                 "short": true
-      #               }
-      #             ],
-      #             "thumb_url": "https://example.com/milestone-thumbnail.png",
-      #             "footer": "Project Update Bot",
-      #             "footer_icon": "https://example.com/bot-icon.png",
-      #             "ts": 1628880000
       #           }
       #         ]
       #       }
       #   env:
-      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      #     SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+      #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+
+      - name: Send custom JSON data to Slack workflow
+        id: slack
+        uses: slackapi/slack-github-action@v1.27.0
+        with:
+          # For posting a rich message using Block Kit
+          payload: |
+            {
+              "text": "New Order Received :package:",
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Order Summary",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Order ID:* 12345678\n*Customer Name:* John Doe\n*Total:* $199.99\n*Order Date:* September 4th, 2024"
+                  },
+                  "accessory": {
+                    "type": "image",
+                    "image_url": "https://example.com/order-image.png",
+                    "alt_text": "Order Image"
+                  }
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Order Details:*"
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Item:* iPhone 14 Pro"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Price:* $999.99"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Item:* AirPods Pro"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Price:* $199.99"
+                    }
+                  ]
+                },
+                {
+                  "type": "context",
+                  "elements": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "Order will be shipped to *123 Apple Street, Cupertino, CA*."
+                    }
+                  ]
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Order",
+                        "emoji": true
+                      },
+                      "url": "https://example.com/orders/12345678",
+                      "style": "primary"
+                    },
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "Contact Support",
+                        "emoji": true
+                      },
+                      "url": "https://example.com/support",
+                      "style": "danger"
+                    }
+                  ]
+                }
+              ],
+              "attachments": [
+                {
+                  "fallback": "Order Update",
+                  "color": "#36a64f",
+                  "pretext": "Shipping Information",
+                  "author_name": "Shipping Department",
+                  "author_link": "https://example.com/shipping",
+                  "author_icon": "https://example.com/shipping-icon.png",
+                  "title": "Order Shipped",
+                  "text": "Your order has been shipped and is on its way.",
+                  "fields": [
+                    {
+                      "title": "Carrier",
+                      "value": "FedEx",
+                      "short": true
+                    },
+                    {
+                      "title": "Tracking Number",
+                      "value": "1Z9999999999999999",
+                      "short": true
+                    }
+                  ],
+                  "image_url": "https://example.com/shipping-status.png",
+                  "thumb_url": "https://example.com/shipping-icon.png",
+                  "footer": "Company Name",
+                  "footer_icon": "https://example.com/footer-icon.png",
+                  "ts": 1633728000
+                }
+              ]
+            }
+
+
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
