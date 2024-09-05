@@ -19,42 +19,22 @@ jobs:
         with:
           payload: |
             {
-              "text": "A release is published.",
-              "blocks": [
+              "attachments": [
                 {
-                  "type": "header",
-                  "text": {
-                    "type": "plain_text",
-                    "text": "${{ github.event.release.tag_name }} is published!"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*Author:*\n${{ github.actor }}"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*Information:*"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "${{ toJSON(github.event.release.body) }}"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "${{ github.event.release.html_url }}"
-                  }
+                  "fallback": "New CPS Release: ${{ github.event.release.tag_name }} is published",
+                  "color": "#36a64f",
+                  "pretext": "New release: ${{ github.event.release.tag_name }} published by ingka-cps-ci",
+                  "title": "<${{ github.event.release.html_url }}|Release - ${{ github.event.release.tag_name }}>",
+                  "text": "\n\n\n",
+                  "fields": [
+                    {
+                      "title": "\n\n\nDeployment log",
+                      "value": "${{ toJSON(github.event.release.body) }}",
+                      "short": false
+                    }
+                  ],
+                  "footer": "GitHub Repository",
+                  "footer_icon": "https://github.githubassets.com/favicon.ico"
                 }
               ]
             }
