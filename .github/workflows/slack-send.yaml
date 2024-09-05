@@ -1,6 +1,7 @@
 name: Slack Send
 
 on:
+  push:
   workflow_dispatch:
 
 jobs:
@@ -14,14 +15,156 @@ jobs:
           # For posting a rich message using Block Kit
           payload: |
             {
-              "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+              "text": "Daily Project Update",
               "blocks": [
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                    "text": "*Project Update*\nHere is the latest update for the project:"
                   }
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Tasks Completed Today:*"
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Frontend*\n1. Implemented login feature\n2. Fixed UI bugs"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Backend*\n1. API integration with third-party service\n2. Optimized database queries"
+                    }
+                  ]
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Tomorrow's Priorities:*"
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Frontend*\n1. Implement password reset flow\n2. Finalize dashboard layout"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Backend*\n1. Setup caching mechanism\n2. Add new endpoints for analytics"
+                    }
+                  ]
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Team Members Involved:*"
+                  }
+                },
+                {
+                  "type": "context",
+                  "elements": [
+                    {
+                      "type": "image",
+                      "image_url": "https://example.com/team-member1.png",
+                      "alt_text": "Team Member 1"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "Team Member 1: John Doe"
+                    },
+                    {
+                      "type": "image",
+                      "image_url": "https://example.com/team-member2.png",
+                      "alt_text": "Team Member 2"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "Team Member 2: Jane Smith"
+                    }
+                  ]
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Project Status:* :green_circle: On Track"
+                  }
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Full Report",
+                        "emoji": true
+                      },
+                      "value": "view_report",
+                      "url": "https://example.com/full-report"
+                    },
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "Request Feedback",
+                        "emoji": true
+                      },
+                      "value": "request_feedback",
+                      "action_id": "request_feedback"
+                    }
+                  ]
+                }
+              ],
+              "attachments": [
+                {
+                  "color": "#36a64f",
+                  "pretext": "Project milestone achieved!",
+                  "title": "Milestone 1",
+                  "title_link": "https://example.com/milestone-1",
+                  "text": "We have successfully completed the first milestone of the project. All tasks were completed on schedule.",
+                  "fields": [
+                    {
+                      "title": "Start Date",
+                      "value": "2023-08-01",
+                      "short": true
+                    },
+                    {
+                      "title": "End Date",
+                      "value": "2023-09-01",
+                      "short": true
+                    }
+                  ],
+                  "thumb_url": "https://example.com/milestone-thumbnail.png",
+                  "footer": "Project Update Bot",
+                  "footer_icon": "https://example.com/bot-icon.png",
+                  "ts": 1628880000
                 }
               ]
             }
