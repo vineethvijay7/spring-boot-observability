@@ -12,11 +12,12 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
-      
-      - name: Slack Notification on SUCCESS
-        if: success()
-        uses: slackapi/slack-github-action@v1.23.0
+
+      - name: Send custom JSON data to Slack workflow
+        id: slack
+        uses: slackapi/slack-github-action@v1.27.0
         with:
+          # For posting a rich message using Block Kit
           payload: |
             {
               "attachments": [
@@ -40,6 +41,34 @@ jobs:
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+
+      # - name: Slack Notification on SUCCESS
+      #   uses: slackapi/slack-github-action@v1.23.0
+      #   with:
+      #     payload: |
+      #       {
+      #         "attachments": [
+      #           {
+      #             "fallback": "New CPS Release: ${{ github.event.release.tag_name }} is published",
+      #             "color": "#36a64f",
+      #             "pretext": "New release: ${{ github.event.release.tag_name }} published by ingka-cps-ci",
+      #             "title": "<${{ github.event.release.html_url }}|Release - ${{ github.event.release.tag_name }}>",
+      #             "text": "\n\n\n",
+      #             "fields": [
+      #               {
+      #                 "title": "\n\n\nDeployment log",
+      #                 "value": "${{ toJSON(github.event.release.body) }}",
+      #                 "short": false
+      #               }
+      #             ],
+      #             "footer": "GitHub Repository",
+      #             "footer_icon": "https://github.githubassets.com/favicon.ico"
+      #           }
+      #         ]
+      #       }
+      #   env:
+      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
 
       # - name: Slack Notification on SUCCESS
