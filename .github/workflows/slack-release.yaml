@@ -12,7 +12,7 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
-
+        
       - name: Send custom JSON data to Slack workflow
         id: slack
         uses: slackapi/slack-github-action@v1.27.0
@@ -26,10 +26,10 @@ jobs:
                   "color": "#36a64f",
                   "pretext": "New release: ${{ github.event.release.tag_name }} published by ingka-cps-ci",
                   "title": "<${{ github.event.release.html_url }}|Release - ${{ github.event.release.tag_name }}>",
-                  "text": "\n\n\n",
+                  "text": "Released components:",
                   "fields": [
                     {
-                      "title": "\n\n\nDeployment log",
+                      "title": "Deployment log",
                       "value": "${{ toJSON(github.event.release.body) }}",
                       "short": false
                     }
