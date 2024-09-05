@@ -45,10 +45,10 @@ jobs:
                   "color": "#36a64f",
                   "pretext": "New release published by ingka-cps-ci",
                   "title": "<https://github.com/ingka-group-digital/cps-catalogue/releases/tag/242|Release - CPS-v242>",
-                  "text": "Released components:\n• cps-pack-backend v2.34.0\n• cps-pick-backend v0.92.0",
+                  "text": "\n\n\nReleased components:\n• cps-pack-backend v2.34.0\n• cps-pick-backend v0.92.0",
                   "fields": [
                     {
-                      "title": "Deployment log",
+                      "title": "\n\n\nDeployment log",
                       "value": "<https://github.com/ingka-group-digital/cps-catalogue|ingka-group-digital/cps-catalogue> | Today at 10:51 AM",
                       "short": false
                     }
