@@ -77,7 +77,4 @@ docker-compose down --remove-orphans
 docker volume rm otel_grafana-storage otel_loki-storage otel_mimir-storage otel_minio-data otel_prometheus-data otel_tempo-storage
 ```
 
-## Questions?
 
-Reach out to:
-[Vineeth Vijayan, DevOps, CPS Outbound](https://github.com/vineethvijay7)
