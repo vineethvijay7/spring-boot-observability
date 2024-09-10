@@ -37,7 +37,7 @@ jobs:
         with:
           # Unlike the step posting a new message, this step does not accept a channel name.
           # Please use a channel ID, not a name here.
-          channel-id: "cps-gke-alerts-test"
+          channel-id: "C05P5DFAZ26"
           update-ts: ${{ steps.slack.outputs.ts }}
           payload: |
             {
