@@ -10,10 +10,6 @@ There are different ways to collect observability data out of your java applicai
 
 We are using the <https://github.com/open-telemetry/opentelemetry-java-instrumentation> java agent method.
 
-## Two stacks in this setup
-
-- **docker-compose.yaml** : To run everything(including grafana stack) in local docker environment. Idea is that, this will help you to understand and set up and everything in local correctly before preparing to send it to Context.
-
 ### Get OpenTelemetry Java Agent
 
 First, download the OpenTelemetry Java agent:
@@ -44,19 +40,6 @@ Next, run the Docker Compose file with the following commands:
 
 ```bash
 docker compose up --remove-orphans
-```
-
-#### Stack that sends data to Context
-
-```bash
-# pre-requisite: needs the context token to be updated in the `etc/otel-collector/config-context.yaml`
-docker compose -f docker-compose-context.yaml up --remove-orphans
-```
-
-#### View otel-collector logs isolated
-
-```bash
-docker logs otel-collector -f
 ```
 
 ### Endpoints for full local stack
