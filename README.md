@@ -1,6 +1,6 @@
 # Java spring boot app with OpenTelemetry (OTEL) and Grafana stack
 
-To run OpenTelemetry (OTEL) collector for  local and also one to send logs to Context for a Java (Spring Boot) application.
+To run OpenTelemetry (OTEL) collector to send observability data from a Java spring boot app to Grafana stack.
 
 Check [Spring Boot app/](app/) directory for more details on the demo app.
 
